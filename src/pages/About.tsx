@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, Row, Col } from 'antd';
 import { CheckCircleOutlined } from '@ant-design/icons';
-import img_hero from '../assets/images/aesthetic-summer-holidays.jpg';
+import img_hero from '../assets/images/about-bg.jpg';
 import AnimatedSection from '../components/AnimatedSection';
 import adobe_cerificate from '../assets/images/Adobe-Certified.jpg';
 import ps_logo from '../assets/images/photoshop.png';
@@ -53,7 +53,6 @@ const About: React.FC = () => {
               left: 0,
               width: '100%',
               height: '100%',
-              background: 'linear-gradient(to bottom, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.75))',
               zIndex: 2,
             }}
           />
@@ -82,11 +81,12 @@ const About: React.FC = () => {
             </h1>
             <p
               style={{
-                fontSize: 'clamp(16px, 2vw, 20px)',
+                fontSize: 'clamp(16px, 2vw, 24px)',
                 lineHeight: 1.8,
                 color: 'rgba(255, 255, 255, 0.9)',
                 maxWidth: '900px',
                 margin: '0 auto',
+                letterSpacing: '1px',
                 textShadow: '0 2px 8px rgba(0,0,0,0.3)',
               }}
             >

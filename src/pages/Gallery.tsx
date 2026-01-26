@@ -1,7 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Layout, Row, Col, Card } from 'antd';
 import img_hero from '../assets/images/aesthetic-summer-holidays.jpg';
 import AnimatedSection from '../components/AnimatedSection';
+import BeforeAfterSlider from '../components/BeforeAfterSlider';
+import clipingbefore from '../assets/images/clipping-before-1.jpg';
+import clipingafter from '../assets/images/clipping-after-1.jpg';
+import hdrBefore from '../assets/images/HDR-before-1.jpg';
+import hdrAfter from '../assets/images/HDR-after-1.jpg';
+import objectRemovalBefore from '../assets/images/object-removal-before-1.jpg';
+import objectRemovalAfter from '../assets/images/object-removal-after-1.jpg';
+import virtualStagingBefore from '../assets/images/virtual-staging-before-1.jpg';
+import virtualStagingAfter from '../assets/images/virtual-staging-after-1.jpg';
+import skyBefore from '../assets/images/sky-replacement-before-1.jpg';
+import skyAfter from '../assets/images/sky-replacement-after-1.jpg';
+import twilightBefore from '../assets/images/twilight-before-1.jpg';
+import twilightAfter from '../assets/images/twilight-after-1.jpg';
+import flabientBefore from '../assets/images/flabient-before-1.jpg';
+import flabientAfter from '../assets/images/flabient-after-1.jpg';
+import arielBefore from '../assets/images/ariel-before-2.jpg';
+import arielAfter from '../assets/images/ariel-after-1.jpg';
 
 const { Content } = Layout;
 
@@ -16,100 +33,88 @@ interface ServiceGallery {
 }
 
 const Gallery: React.FC = () => {
-  const [comparisonPositions, setComparisonPositions] = useState<Record<string, number>>({});
-
   const serviceGalleries: ServiceGallery[] = [
     {
       id: 'color',
       title: 'Image Enhancement and Color Correction',
       images: [
-        { id: 'color-1', beforeImage: img_hero, afterImage: img_hero },
-        { id: 'color-2', beforeImage: img_hero, afterImage: img_hero },
-        { id: 'color-3', beforeImage: img_hero, afterImage: img_hero },
-        { id: 'color-4', beforeImage: img_hero, afterImage: img_hero },
+        { id: 'color-1', beforeImage: clipingbefore, afterImage: clipingafter },
+        { id: 'color-2', beforeImage: clipingbefore, afterImage: clipingafter },
+        { id: 'color-3', beforeImage: clipingbefore, afterImage: clipingafter },
+        { id: 'color-4', beforeImage: clipingbefore, afterImage: clipingafter },
       ],
     },
     {
-      id: 'perspective',
-      title: 'Perspective Correction',
+      id: 'twilight',
+      title: 'Twilight Photo Editing',
       images: [
-        { id: 'perspective-1', beforeImage: img_hero, afterImage: img_hero },
-        { id: 'perspective-2', beforeImage: img_hero, afterImage: img_hero },
-        { id: 'perspective-3', beforeImage: img_hero, afterImage: img_hero },
-        { id: 'perspective-4', beforeImage: img_hero, afterImage: img_hero },
+        { id: 'twilight-1', beforeImage: twilightBefore, afterImage: twilightAfter },
+        { id: 'twilight-2', beforeImage: twilightBefore, afterImage: twilightAfter },
+        { id: 'twilight-3', beforeImage: twilightBefore, afterImage: twilightAfter },
+        { id: 'twilight-4', beforeImage: twilightBefore, afterImage: twilightAfter },
       ],
     },
     {
       id: 'hdr',
       title: 'HDR Real Estate Photo Editing',
       images: [
-        { id: 'hdr-1', beforeImage: img_hero, afterImage: img_hero },
-        { id: 'hdr-2', beforeImage: img_hero, afterImage: img_hero },
-        { id: 'hdr-3', beforeImage: img_hero, afterImage: img_hero },
-        { id: 'hdr-4', beforeImage: img_hero, afterImage: img_hero },
+        { id: 'hdr-1', beforeImage: hdrBefore, afterImage: hdrAfter },
+        { id: 'hdr-2', beforeImage: hdrBefore, afterImage: hdrAfter },
+        { id: 'hdr-3', beforeImage: hdrBefore, afterImage: hdrAfter },
+        { id: 'hdr-4', beforeImage: hdrBefore, afterImage: hdrAfter },
       ],
     },
     {
       id: 'object',
       title: 'Object Removal/Addition',
       images: [
-        { id: 'object-1', beforeImage: img_hero, afterImage: img_hero },
-        { id: 'object-2', beforeImage: img_hero, afterImage: img_hero },
-        { id: 'object-3', beforeImage: img_hero, afterImage: img_hero },
-        { id: 'object-4', beforeImage: img_hero, afterImage: img_hero },
+        { id: 'object-1', beforeImage: objectRemovalBefore, afterImage: objectRemovalAfter },
+        { id: 'object-2', beforeImage: objectRemovalBefore, afterImage: objectRemovalAfter },
+        { id: 'object-3', beforeImage: objectRemovalBefore, afterImage: objectRemovalAfter },
+        { id: 'object-4', beforeImage: objectRemovalBefore, afterImage: objectRemovalAfter },
       ],
     },
     {
       id: 'staging',
       title: 'Virtual Staging and Renovations',
       images: [
-        { id: 'staging-1', beforeImage: img_hero, afterImage: img_hero },
-        { id: 'staging-2', beforeImage: img_hero, afterImage: img_hero },
-        { id: 'staging-3', beforeImage: img_hero, afterImage: img_hero },
-        { id: 'staging-4', beforeImage: img_hero, afterImage: img_hero },
+        { id: 'staging-1', beforeImage: virtualStagingBefore, afterImage: virtualStagingAfter },
+        { id: 'staging-2', beforeImage: virtualStagingBefore, afterImage: virtualStagingAfter },
+        { id: 'staging-3', beforeImage: virtualStagingBefore, afterImage: virtualStagingAfter },
+        { id: 'staging-4', beforeImage: virtualStagingBefore, afterImage: virtualStagingAfter },
       ],
     },
     {
       id: 'sky',
       title: 'Sky Replacement',
       images: [
-        { id: 'sky-1', beforeImage: img_hero, afterImage: img_hero },
-        { id: 'sky-2', beforeImage: img_hero, afterImage: img_hero },
-        { id: 'sky-3', beforeImage: img_hero, afterImage: img_hero },
-        { id: 'sky-4', beforeImage: img_hero, afterImage: img_hero },
+        { id: 'sky-1', beforeImage: skyBefore, afterImage: skyAfter },
+        { id: 'sky-2', beforeImage: skyBefore, afterImage: skyAfter },
+        { id: 'sky-3', beforeImage: skyBefore, afterImage: skyAfter },
+        { id: 'sky-4', beforeImage: skyBefore, afterImage: skyAfter },
       ],
     },
     {
       id: 'flambient',
       title: 'Flambient Photo Editing',
       images: [
-        { id: 'flambient-1', beforeImage: img_hero, afterImage: img_hero },
-        { id: 'flambient-2', beforeImage: img_hero, afterImage: img_hero },
-        { id: 'flambient-3', beforeImage: img_hero, afterImage: img_hero },
-        { id: 'flambient-4', beforeImage: img_hero, afterImage: img_hero },
+        { id: 'flambient-1', beforeImage: flabientBefore, afterImage: flabientAfter },
+        { id: 'flambient-2', beforeImage: flabientBefore, afterImage: flabientAfter },
+        { id: 'flambient-3', beforeImage: flabientBefore, afterImage: flabientAfter },
+        { id: 'flambient-4', beforeImage: flabientBefore, afterImage: flabientAfter },
       ],
     },
     {
       id: 'aerial',
       title: 'Aerial Photo Editing',
       images: [
-        { id: 'aerial-1', beforeImage: img_hero, afterImage: img_hero },
-        { id: 'aerial-2', beforeImage: img_hero, afterImage: img_hero },
-        { id: 'aerial-3', beforeImage: img_hero, afterImage: img_hero },
-        { id: 'aerial-4', beforeImage: img_hero, afterImage: img_hero },
+        { id: 'aerial-1', beforeImage: arielBefore, afterImage: arielAfter },
+        { id: 'aerial-2', beforeImage: arielBefore, afterImage: arielAfter },
+        { id: 'aerial-3', beforeImage: arielBefore, afterImage: arielAfter },
+        { id: 'aerial-4', beforeImage: arielBefore, afterImage: arielAfter },
       ],
     },
   ];
-
-  React.useEffect(() => {
-    const initialPositions: Record<string, number> = {};
-    serviceGalleries.forEach((service) => {
-      service.images.forEach((image) => {
-        initialPositions[image.id] = 50;
-      });
-    });
-    setComparisonPositions(initialPositions);
-  }, []);
 
   return (
     <Content>
@@ -217,34 +222,7 @@ const Gallery: React.FC = () => {
               </div>
 
               <Row gutter={[24, 24]}>
-                {service.images.map((image) => {
-                const position = comparisonPositions[image.id] ?? 50;
-                const [isDragging, setIsDragging] = React.useState(false);
-
-                const handleMouseDown = () => setIsDragging(true);
-
-                const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-                  if (!isDragging) return;
-
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  const newPosition = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
-
-                  setComparisonPositions((prev) => ({
-                    ...prev,
-                    [image.id]: newPosition,
-                  }));
-                };
-
-                const handleMouseUp = () => setIsDragging(false);
-
-                React.useEffect(() => {
-                  if (isDragging) {
-                    window.addEventListener('mouseup', handleMouseUp);
-                    return () => window.removeEventListener('mouseup', handleMouseUp);
-                  }
-                }, [isDragging]);
-
-                return (
+                {service.images.map((image) => (
                   <Col key={image.id} xs={24} sm={12} lg={6}>
                     <Card
                       style={{
@@ -256,130 +234,12 @@ const Gallery: React.FC = () => {
                       }}
                       bodyStyle={{ padding: 0 }}
                     >
-                      <div
-                        style={{
-                          position: 'relative',
-                          height: '280px',
-                          overflow: 'hidden',
-                          userSelect: 'none',
-                          cursor: isDragging ? 'grabbing' : 'grab',
-                        }}
-                        onMouseDown={handleMouseDown}
-                        onMouseMove={handleMouseMove}
-                        onMouseLeave={() => setIsDragging(false)}
-                      >
-                        {/* Before Image (Background) */}
-                        <div
-                          style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            width: '100%',
-                            height: '100%',
-                            backgroundImage: `url(${image.beforeImage})`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center',
-                          }}
-                        />
-
-                        {/* After Image (Overlay) */}
-                        <div
-                          style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            width: `${position}%`,
-                            height: '100%',
-                            backgroundImage: `url(${image.afterImage})`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center',
-                            filter: 'saturate(1.08) brightness(1.02)',
-                            overflow: 'hidden',
-                            pointerEvents: 'none',
-                          }}
-                        />
-
-                        {/* Slider Handle */}
-                        <div
-                          style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: `${position}%`,
-                            width: '3px',
-                            height: '100%',
-                            background: '#fff',
-                            cursor: 'ew-resize',
-                            transform: 'translateX(-50%)',
-                            zIndex: 10,
-                            boxShadow: '0 0 10px rgba(0,0,0,0.25)',
-                            pointerEvents: 'none',
-                          }}
-                        >
-                          <div
-                            style={{
-                              position: 'absolute',
-                              top: '50%',
-                              left: '50%',
-                              transform: 'translate(-50%, -50%)',
-                              width: '36px',
-                              height: '36px',
-                              borderRadius: '50%',
-                              background: '#fff',
-                              border: '3px solid #f97316',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              boxShadow: '0 4px 10px rgba(0,0,0,0.15)',
-                              cursor: 'ew-resize',
-                              pointerEvents: 'none',
-                            }}
-                          >
-                            <span style={{ fontSize: '14px', color: '#f97316', fontWeight: 700 }}>⟷</span>
-                          </div>
-                        </div>
-
-                        {/* Labels */}
-                        <div
-                          style={{
-                            position: 'absolute',
-                            top: '12px',
-                            left: '12px',
-                            background: 'rgba(0,0,0,0.75)',
-                            color: '#fff',
-                            padding: '6px 12px',
-                            borderRadius: '6px',
-                            fontSize: '11px',
-                            fontWeight: 600,
-                            letterSpacing: '0.3px',
-                            zIndex: 5,
-                            pointerEvents: 'none',
-                          }}
-                        >
-                          BEFORE
-                        </div>
-                        <div
-                          style={{
-                            position: 'absolute',
-                            top: '12px',
-                            right: '12px',
-                            background: 'rgba(249, 115, 22, 0.92)',
-                            color: '#fff',
-                            padding: '6px 12px',
-                            borderRadius: '6px',
-                            fontSize: '11px',
-                            fontWeight: 600,
-                            letterSpacing: '0.3px',
-                            zIndex: 5,
-                            pointerEvents: 'none',
-                          }}
-                        >
-                          AFTER
-                        </div>
+                      <div style={{ height: '280px', overflow: 'hidden', borderRadius: '12px', position: 'relative' }}>
+                        <BeforeAfterSlider beforeImage={image.beforeImage} afterImage={image.afterImage} />
                       </div>
                     </Card>
                   </Col>
-                );
-                })}
+                ))}
               </Row>
             </div>
           </section>

@@ -39,7 +39,7 @@ const Contact: React.FC = () => {
     {
       icon: <ClockCircleOutlined />,
       title: 'Business Hours',
-      details: ['Mon - Fri: 9:00 AM - 6:00 PM', 'Sat - Sun: 10:00 AM - 4:00 PM']
+      details: ['We operate 24/7']
     }
   ];
 
@@ -589,8 +589,7 @@ const Contact: React.FC = () => {
                     Quick Response Guarantee
                   </h3>
                   <p style={{ color: 'rgba(255, 255, 255, 0.85)', margin: 0, fontSize: '15px', lineHeight: 1.7 }}>
-                    We respond to all inquiries within 2 hours during business hours. 
-                    For urgent projects, call us directly for immediate assistance.
+                    We respond to all inquiries within 2 hours, 24/7. For urgent projects, call us directly for immediate assistance.
                   </p>
                 </div>
               </Card>

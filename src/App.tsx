@@ -3,6 +3,7 @@ import { ConfigProvider, Layout, Spin, theme } from 'antd';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/header';
 import Footer from './components/footer';
+import FloatingSocial from './components/FloatingSocial';
 
 // Lazy load pages for better performance and code splitting
 const Home = React.lazy(() => import('./pages/Home'));
@@ -49,6 +50,7 @@ const App: React.FC = () => {
         <Layout className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
           {/* Header - Fixed positioning handled within component */}
           <Header />
+          <FloatingSocial />
           
           {/* Main Content Area */}
           <Layout className="bg-transparent">

@@ -9,21 +9,13 @@ import img_03 from '../assets/images/hero-img-3.jpg';
 import freeTrail from '../assets/images/free-trial_5579376.png';
 import fastAndQualityEditing from '../assets/images/stopwatch_4109118.png';
 import noSubscriptions from '../assets/images/subscription-inactive.png';
-import unlimitedChanges from '../assets/images/subscription-inactive.png';
-import noCopyRight from '../assets/images/forever.png';
+import unlimitedChanges from '../assets/images/change.png';
+import noCopyRight from '../assets/images/documents.png';
 import realService from '../assets/images/24-7.png';
 import testimonial_01 from '../assets/images/testimonial-1.jpg';
 import testimonial_02 from '../assets/images/testimonial-2.jpg';
-import testimonial_03 from '../assets/images/testimonial-3.jpg'
-import testimonial_04 from '../assets/images/testimonial-4.jpg'
-/* ─────────────────────────────────────────────────────────────────────────────
-   Home Page Component
-   - Hero carousel with 3 slides
-   - Features section (Why We're Your Best Choice)
-   - How It Works section
-   - Upload / Free Trial section
-   - Testimonials section
-   ───────────────────────────────────────────────────────────────────────────── */
+import testimonial_03 from '../assets/images/testimonial-3.jpg';
+import testimonial_04 from '../assets/images/testimonial-4.jpg';
 
 const { TextArea } = Input;
 

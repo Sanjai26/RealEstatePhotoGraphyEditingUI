@@ -2,11 +2,29 @@ import React, { useState } from 'react';
 import { Layout, Typography, Card, Row, Col, Button, Input, Form, message, Tag } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import BeforeAfterSlider from '../components/BeforeAfterSlider';
 import AnimatedSection from '../components/AnimatedSection';
 import img_hero from '../assets/images/aesthetic-summer-holidays.jpg';
 import aiIcon from '../assets/images/artificial-intelligence.png';
 import stopwatchIcon from '../assets/images/stopwatch.png';
 import infinityIcon from '../assets/images/forever.png';
+import clipingbefore from '../assets/images/clipping-before-1.jpg';
+import clipingafter from '../assets/images/clipping-after-1.jpg';
+import hdrBefore from '../assets/images/HDR-before-1.jpg';
+import hdrAfter from '../assets/images/HDR-after-1.jpg';
+import objectRemovalBefore from '../assets/images/object-removal-before-1.jpg';
+import objectRemovalAfter from '../assets/images/object-removal-after-1.jpg';
+import virtualStagingBefore from '../assets/images/virtual-staging-before-1.jpg';
+import virtualStagingAfter from '../assets/images/virtual-staging-after-1.jpg';
+import skyBefore from '../assets/images/sky-replacement-before-1.jpg';
+import skyAfter from '../assets/images/sky-replacement-after-1.jpg';
+import twilightBefore from '../assets/images/twilight-before-1.jpg';
+import twilightAfter from '../assets/images/twilight-after-1.jpg';
+import flabientBefore from '../assets/images/flabient-before-1.jpg';
+import flabientAfter from '../assets/images/flabient-after-1.jpg';
+import arielBefore from '../assets/images/ariel-before-2.jpg';
+import arielAfter from '../assets/images/ariel-after-1.jpg';
+
 
 const { Content } = Layout;
 const { Title, Paragraph } = Typography;
@@ -15,17 +33,17 @@ const { TextArea } = Input;
 const comparisonServices = [
   {
     id: 'color',
-    title: 'Image Enhancement and Color Correction',
+    title: 'Clipping Path',
     tag: 'Color & Lighting',
     description:
-      'Transform your real estate photos with professional color correction, exposure adjustment, and image enhancement. We balance lighting, fix color temperatures, and enhance details to make your properties stand out.',
+      'Achieve clean, precise background removal with our professional clipping path service. We manually trace subjects using vector paths to isolate objects with sharp, accurate edges—perfect for product images, eCommerce listings, and marketing visuals.',
   },
   {
-    id: 'perspective',
-    title: 'Perspective Correction',
-    tag: 'Straight Lines',
+    id: 'twilight',
+    title: 'Twilight Photo Editing',
+    tag: 'Day-to-Dusk',
     description:
-      'Fix distorted angles and achieve perfect vertical lines in your real estate photos. Our perspective correction service ensures professional-looking images that showcase properties accurately.',
+      'Transform daytime property photos into stunning twilight scenes with perfectly balanced ambient and artificial lighting. Create dramatic, high-converting evening property photos that showcase your listings in their best light.',
   },
   {
     id: 'hdr',
@@ -95,21 +113,39 @@ const Services: React.FC = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
-  const [comparisonPositions, setComparisonPositions] = useState<Record<string, number>>(() =>
-    comparisonServices.reduce((acc, svc) => {
-      acc[svc.id] = 50;
-      return acc;
-    }, {} as Record<string, number>)
-  );
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (values: any) => {
     setLoading(true);
     try {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Use import.meta.env for Vite environment variables
+      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
+      
+      // Map form fields to backend MailServiceEntity
+      const mailServiceEntity = {
+        customerName: values.name,
+        mailId: values.email,
+        specificMailService: values.service || 'General Inquiry',
+        comment: values.description,
+        specificPlatform: values.platform || 'Website',
+        link: window.location.href,
+      };
+
+      const response = await fetch(`${API_BASE_URL}/api/requestMail`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(mailServiceEntity),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       message.success('Request sent successfully! We\'ll contact you soon.');
       form.resetFields();
     } catch (error) {
+      console.error('Error submitting form:', error);
       message.error('Failed to send request. Please try again.');
     } finally {
       setLoading(false);
@@ -312,25 +348,6 @@ const Services: React.FC = () => {
                       </Col>
                     </Row>
                   </div>
-
-                  {/* CTA Button */}
-                  <Button
-                    type="primary"
-                    size="large"
-                    style={{
-                      height: '50px',
-                      padding: '0 40px',
-                      fontSize: '16px',
-                      fontWeight: 600,
-                      background: 'linear-gradient(135deg, #f97316, #ea580c)',
-                      border: 'none',
-                      borderRadius: '8px',
-                      boxShadow: '0 8px 24px rgba(249, 115, 22, 0.4)',
-                    }}
-                    onClick={() => document.getElementById('services-grid')?.scrollIntoView({ behavior: 'smooth' })}
-                  >
-                    Explore Services
-                  </Button>
                 </div>
               </Col>
 
@@ -494,32 +511,6 @@ const Services: React.FC = () => {
 
             <Row gutter={[24, 24]}>
             {comparisonServices.map((svc) => {
-              const position = comparisonPositions[svc.id] ?? 50;
-              const [isDragging, setIsDragging] = React.useState(false);
-
-              const handleMouseDown = () => setIsDragging(true);
-
-              const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-                if (!isDragging) return;
-
-                const rect = e.currentTarget.getBoundingClientRect();
-                const newPosition = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
-
-                setComparisonPositions((prev) => ({
-                  ...prev,
-                  [svc.id]: newPosition,
-                }));
-              };
-
-              const handleMouseUp = () => setIsDragging(false);
-
-              React.useEffect(() => {
-                if (isDragging) {
-                  window.addEventListener('mouseup', handleMouseUp);
-                  return () => window.removeEventListener('mouseup', handleMouseUp);
-                }
-              }, [isDragging]);
-
               return (
                 <Col key={svc.id} xs={24} md={12}>
                   <Card
@@ -532,86 +523,11 @@ const Services: React.FC = () => {
                     }}
                     bodyStyle={{ padding: 0 }}
                   >
-                    <div
-                      style={{
-                        position: 'relative',
-                        height: '320px',
-                        overflow: 'hidden',
-                        userSelect: 'none',
-                        cursor: isDragging ? 'grabbing' : 'grab',
-                      }}
-                      onMouseDown={handleMouseDown}
-                      onMouseMove={handleMouseMove}
-                      onMouseLeave={() => setIsDragging(false)}
-                    >
-                      <div
-                        style={{
-                          position: 'absolute',
-                          top: 0,
-                          left: 0,
-                          width: '100%',
-                          height: '100%',
-                          backgroundImage: `url(${img_hero})`,
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
-                        }}
+                    <div style={{ height: '400px', overflow: 'hidden', borderRadius: '12px', position: 'relative' }}>
+                      <BeforeAfterSlider
+                        beforeImage={svc.id === 'color' ? clipingbefore : svc.id === 'hdr' ? hdrBefore : svc.id === 'object' ? objectRemovalBefore : svc.id === 'staging' ? virtualStagingBefore : svc.id === 'sky' ? skyBefore : svc.id === 'twilight' ? twilightBefore : svc.id === 'flambient' ? flabientBefore : svc.id === 'aerial' ? arielBefore : img_hero}
+                        afterImage={svc.id === 'color' ? clipingafter : svc.id === 'hdr' ? hdrAfter : svc.id === 'object' ? objectRemovalAfter : svc.id === 'staging' ? virtualStagingAfter : svc.id === 'sky' ? skyAfter : svc.id === 'twilight' ? twilightAfter : svc.id === 'flambient' ? flabientAfter : svc.id === 'aerial' ? arielAfter : img_hero}
                       />
-
-                      <div
-                        style={{
-                          position: 'absolute',
-                          top: 0,
-                          left: 0,
-                          width: `${position}%`,
-                          height: '100%',
-                          backgroundImage: `url(${img_hero})`,
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
-                          overflow: 'hidden',
-                          pointerEvents: 'none',
-                        }}
-                      />
-
-                      <div
-                        style={{
-                          position: 'absolute',
-                          top: 0,
-                          left: `${position}%`,
-                          width: '4px',
-                          height: '100%',
-                          background: '#fff',
-                          cursor: 'ew-resize',
-                          transform: 'translateX(-50%)',
-                          zIndex: 10,
-                          boxShadow: '0 0 10px rgba(0,0,0,0.25)',
-                          pointerEvents: 'none',
-                        }}
-                      >
-                        <div
-                          style={{
-                            position: 'absolute',
-                            top: '50%',
-                            left: '50%',
-                            transform: 'translate(-50%, -50%)',
-                            width: '44px',
-                            height: '44px',
-                            borderRadius: '50%',
-                            background: '#fff',
-                            border: '3px solid #f97316',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            boxShadow: '0 4px 10px rgba(0,0,0,0.15)',
-                            cursor: 'ew-resize',
-                            pointerEvents: 'none',
-                          }}
-                        >
-                          <span style={{ fontSize: '18px', color: '#f97316', fontWeight: 700 }}>⟷</span>
-                        </div>
-                      </div>
-
-                      <div style={{ position: 'absolute', top: '16px', left: '16px', background: 'rgba(0,0,0,0.75)', color: '#fff', padding: '8px 14px', borderRadius: '6px', fontSize: '13px', fontWeight: 600, letterSpacing: '0.3px', zIndex: 5, pointerEvents: 'none' }}>BEFORE</div>
-                      <div style={{ position: 'absolute', top: '16px', right: '16px', background: 'rgba(249, 115, 22, 0.92)', color: '#fff', padding: '8px 14px', borderRadius: '6px', fontSize: '13px', fontWeight: 600, letterSpacing: '0.3px', zIndex: 5, pointerEvents: 'none' }}>AFTER</div>
                     </div>
 
                     <div style={{ padding: '20px 22px 18px', background: '#fff' }}>

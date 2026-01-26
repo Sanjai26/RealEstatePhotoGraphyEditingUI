@@ -1,0 +1,101 @@
+.mainWrapper {
+  width: calc(100vw - 17px);
+  height: calc(100vh - 17px);
+  display: grid;
+}
+
+.contentWrapper {
+  height: 90%;
+  width: 90%;
+  align-self: center;
+  justify-self: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 40px;
+  align-content: center;
+  justify-content: center;
+}
+
+/* Custom Before/After Slider Styles */
+.before-after-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: ew-resize;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.before-after-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.before-after-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.before-after-slider-line {
+  position: absolute;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: #fff;
+  transform: translateX(-50%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.before-after-slider-handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid #f97316;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  pointer-events: auto;
+  cursor: ew-resize;
+}
+
+.before-after-label {
+  position: absolute;
+  top: 16px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.before-label {
+  left: 16px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+}
+
+.after-label {
+  right: 16px;
+  background: rgba(249, 115, 22, 0.92);
+  color: #fff;
+}
