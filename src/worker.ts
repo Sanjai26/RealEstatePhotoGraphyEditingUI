@@ -1,29 +1,30 @@
 export default {
   async fetch(request: Request): Promise<Response> {
     const url = new URL(request.url);
-    
-    // Get the pathname
     const pathname = url.pathname;
-    
+
     // List of file extensions that should be served as-is
-    const staticFileExtensions = ['.js', '.css', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.woff', '.woff2', '.eot', '.ttf', '.otf', '.json'];
-    
+    const staticFileExtensions = [
+      '.js', '.css', '.png', '.jpg', '.jpeg', '.gif', '.svg',
+      '.woff', '.woff2', '.eot', '.ttf', '.otf', '.json', '.ico', '.webp'
+    ];
+
     // Check if the request is for a static file
     const isStaticFile = staticFileExtensions.some(ext => pathname.endsWith(ext));
-    
-    // Try to fetch the requested resource
-    const response = await fetch(request.clone());
-    
-    // If the file exists and it's a static file, return it
-    if (response.status !== 404 && isStaticFile) {
-      return response;
+
+    // If it's a static file, try to fetch it directly
+    if (isStaticFile || pathname === '/') {
+      const response = await fetch(request.clone());
+      if (response.status === 200) {
+        return response;
+      }
     }
-    
-    // If it's not a static file and returns 404, serve index.html for client-side routing
-    if (response.status === 404 && !isStaticFile) {
-      const indexRequest = new Request(new URL('/index.html', request.url), request);
-      const indexResponse = await fetch(indexRequest);
-      
+
+    // For non-static files (routes), serve index.html for client-side routing
+    try {
+      const indexUrl = new URL('/index.html', request.url);
+      const indexResponse = await fetch(new Request(indexUrl, { method: 'GET' }));
+
       if (indexResponse.status === 200) {
         return new Response(indexResponse.body, {
           status: 200,
@@ -34,8 +35,11 @@ export default {
           },
         });
       }
+    } catch (error) {
+      console.error('Error serving index.html:', error);
     }
-    
-    return response;
+
+    // If all else fails, return 404
+    return new Response('Not Found', { status: 404 });
   },
 };
