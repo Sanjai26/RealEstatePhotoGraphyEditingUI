@@ -89,7 +89,7 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
         style={{ left: `${sliderPosition}%` }}
       >
         <div className="before-after-slider-handle">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
             <path d="M8 5L3 12L8 19" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             <path d="M16 5L21 12L16 19" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>

@@ -3,5 +3,15 @@
   "compatibility_date": "2026-01-23",
   "assets": {
     "directory": "./dist"
-  }
+  },
+  "routes": [
+    {
+      "pattern": "^/.*\\.(js|css|png|jpg|jpeg|gif|svg|woff|woff2|eot|ttf|otf)$",
+      "zone_name": "realestatephotographyeditingui.sanjaisanjai561.workers.dev"
+    },
+    {
+      "pattern": "realestatephotographyeditingui.sanjaisanjai561.workers.dev/*",
+      "zone_name": "realestatephotographyeditingui.sanjaisanjai561.workers.dev"
+    }
+  ]
 }

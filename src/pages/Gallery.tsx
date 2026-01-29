@@ -226,7 +226,6 @@ const Gallery: React.FC = () => {
                   <Col key={image.id} xs={24} sm={12} lg={6}>
                     <Card
                       style={{
-                        borderRadius: '16px',
                         overflow: 'hidden',
                         border: '1px solid #e2e8f0',
                         boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
@@ -234,7 +233,7 @@ const Gallery: React.FC = () => {
                       }}
                       bodyStyle={{ padding: 0 }}
                     >
-                      <div style={{ height: '280px', overflow: 'hidden', borderRadius: '12px', position: 'relative' }}>
+                      <div style={{ height: '280px', overflow: 'hidden', position: 'relative' }}>
                         <BeforeAfterSlider beforeImage={image.beforeImage} afterImage={image.afterImage} />
                       </div>
                     </Card>

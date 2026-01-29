@@ -157,6 +157,7 @@ const testimonials = [
 
 const Home: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const navigate = useNavigate();
 
   // Auto-advance hero carousel every 6 seconds
@@ -166,6 +167,10 @@ const Home: React.FC = () => {
     }, 6000);
     return () => clearInterval(timer);
   }, []);
+
+  const toggleFaq = (index: number) => {
+    setOpenFaqIndex(openFaqIndex === index ? null : index);
+  };
 
   return (
     <main style={{ background: '#fff', overflowX: 'hidden' }}>
@@ -415,7 +420,7 @@ const Home: React.FC = () => {
               marginBottom: '16px',
             }}
           >
-            How Ajai Studio Works
+            How AJAIPIXELS Works
           </h2>
           <p
             style={{
@@ -586,6 +591,184 @@ const Home: React.FC = () => {
       </AnimatedSection>
 
       {/* ─────────────────────────────────────────────────────────────────────
+          STATS SECTION
+      ───────────────────────────────────────────────────────────────────── */}
+      <AnimatedSection delayMs={180} yOffset={20}>
+        <section style={{ 
+          padding: '60px 5%', 
+          background: 'linear-gradient(135deg, #f97316 0%, #ea580c 100%)',
+          overflowX: 'hidden' 
+        }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))',
+                gap: '40px',
+                textAlign: 'center',
+              }}
+            >
+              <div>
+                <div style={{ fontSize: 'clamp(40px, 6vw, 56px)', fontWeight: 800, color: '#fff', marginBottom: '8px' }}>
+                  50,000+
+                </div>
+                <div style={{ fontSize: '18px', color: 'rgba(255, 255, 255, 0.9)', fontWeight: 500 }}>
+                  Photos Edited
+                </div>
+              </div>
+              <div>
+                <div style={{ fontSize: 'clamp(40px, 6vw, 56px)', fontWeight: 800, color: '#fff', marginBottom: '8px' }}>
+                  2,500+
+                </div>
+                <div style={{ fontSize: '18px', color: 'rgba(255, 255, 255, 0.9)', fontWeight: 500 }}>
+                  Happy Clients
+                </div>
+              </div>
+              <div>
+                <div style={{ fontSize: 'clamp(40px, 6vw, 56px)', fontWeight: 800, color: '#fff', marginBottom: '8px' }}>
+                  24 Hrs
+                </div>
+                <div style={{ fontSize: '18px', color: 'rgba(255, 255, 255, 0.9)', fontWeight: 500 }}>
+                  Average Turnaround
+                </div>
+              </div>
+              <div>
+                <div style={{ fontSize: 'clamp(40px, 6vw, 56px)', fontWeight: 800, color: '#fff', marginBottom: '8px' }}>
+                  99.98%
+                </div>
+                <div style={{ fontSize: '18px', color: 'rgba(255, 255, 255, 0.9)', fontWeight: 500 }}>
+                  On-Time Delivery
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </AnimatedSection>
+
+      {/* ─────────────────────────────────────────────────────────────────────
+          SERVICES OVERVIEW SECTION
+      ───────────────────────────────────────────────────────────────────── */}
+      <AnimatedSection delayMs={190} yOffset={22}>
+        <section style={{ padding: '60px 5%', background: '#fff', overflowX: 'hidden' }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
+            <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+              <h2
+                style={{
+                  fontSize: 'clamp(28px, 4vw, 40px)',
+                  fontWeight: 700,
+                  color: '#1a1a1a',
+                  marginBottom: '16px',
+                }}
+              >
+                Professional Real Estate Photo Services
+              </h2>
+              <p
+                style={{
+                  color: '#666',
+                  fontSize: '18px',
+                  maxWidth: '700px',
+                  margin: '0 auto',
+                  lineHeight: 1.7,
+                }}
+              >
+                From basic enhancements to advanced virtual staging, we offer complete editing solutions
+              </p>
+            </div>
+
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
+                gap: '30px',
+              }}
+            >
+              {[
+                {
+                  title: 'HDR Real Estate Editing',
+                  description: 'Perfect balance of highlights and shadows for stunning interior and exterior shots',
+                  price: 'Starting at $0.75/photo',
+                },
+                {
+                  title: 'Virtual Staging',
+                  description: 'Transform empty spaces into beautifully furnished rooms that sell properties faster',
+                  price: 'Starting at $24/photo',
+                },
+                {
+                  title: 'Sky Replacement',
+                  description: 'Replace dull or overcast skies with vibrant blue skies for maximum curb appeal',
+                  price: 'Starting at $1.50/photo',
+                },
+                {
+                  title: 'Day to Dusk Conversion',
+                  description: 'Create stunning twilight photos that highlight property features with warm lighting',
+                  price: 'Starting at $3.00/photo',
+                },
+                {
+                  title: 'Object Removal',
+                  description: 'Remove unwanted items, power lines, or distractions for cleaner property photos',
+                  price: 'Starting at $2.00/photo',
+                },
+                {
+                  title: 'Flambient Editing',
+                  description: 'Blend flash and ambient exposures for perfectly lit, natural-looking interiors',
+                  price: 'Starting at $1.25/photo',
+                },
+              ].map((service, index) => (
+                <Card
+                  key={index}
+                  hoverable
+                  style={{
+                    border: '1px solid #e5e7eb',
+                    borderRadius: '16px',
+                    boxShadow: '0 2px 12px rgba(0, 0, 0, 0.04)',
+                    transition: 'all 0.3s ease',
+                  }}
+                  styles={{ body: { padding: '32px' } }}
+                >
+                  <h3
+                    style={{
+                      fontSize: '20px',
+                      fontWeight: 600,
+                      color: '#1a1a1a',
+                      marginBottom: '12px',
+                    }}
+                  >
+                    {service.title}
+                  </h3>
+                  <p style={{ color: '#666', fontSize: '15px', lineHeight: 1.7, marginBottom: '16px' }}>
+                    {service.description}
+                  </p>
+                  <div style={{ fontSize: '16px', fontWeight: 600, color: '#f97316' }}>
+                    {service.price}
+                  </div>
+                </Card>
+              ))}
+            </div>
+
+            <div style={{ textAlign: 'center', marginTop: '40px' }}>
+              <Button
+                type="primary"
+                size="large"
+                onClick={() => navigate('/services')}
+                style={{
+                  height: '50px',
+                  padding: '0 40px',
+                  fontSize: '16px',
+                  fontWeight: 600,
+                  background: 'linear-gradient(135deg, #f97316, #ea580c)',
+                  border: 'none',
+                  borderRadius: '8px',
+                  boxShadow: '0 8px 24px rgba(249, 115, 22, 0.3)',
+                }}
+              >
+                View All Services
+              </Button>
+            </div>
+          </div>
+        </section>
+      </AnimatedSection>
+
+      {/* ─────────────────────────────────────────────────────────────────────
           TESTIMONIALS SECTION
       ───────────────────────────────────────────────────────────────────── */}
       <AnimatedSection delayMs={200} yOffset={24}>
@@ -658,6 +841,201 @@ const Home: React.FC = () => {
               </Card>
             ))}
           </div>
+          </div>
+        </section>
+      </AnimatedSection>
+
+      {/* ─────────────────────────────────────────────────────────────────────
+          FAQ SECTION
+      ───────────────────────────────────────────────────────────────────── */}
+      <AnimatedSection delayMs={220} yOffset={24}>
+        <section style={{ padding: '60px 5%', background: '#fff', overflowX: 'hidden' }}>
+          <div style={{ maxWidth: '900px', margin: '0 auto', width: '100%' }}>
+            <h2
+              style={{
+                textAlign: 'center',
+                fontSize: 'clamp(28px, 4vw, 40px)',
+                fontWeight: 700,
+                color: '#1a1a1a',
+                marginBottom: '16px',
+              }}
+            >
+              Frequently Asked Questions
+            </h2>
+            <p
+              style={{
+                textAlign: 'center',
+                color: '#666',
+                fontSize: '18px',
+                marginBottom: '50px',
+                lineHeight: 1.7,
+              }}
+            >
+              Everything you need to know about our services
+            </p>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              {[
+                {
+                  question: 'What is the turnaround time for photo editing?',
+                  answer: 'Standard photo editing takes 24 hours. Virtual staging requires 48 hours. Rush delivery options are available for urgent projects.',
+                },
+                {
+                  question: 'Do you offer a free trial?',
+                  answer: 'Yes! New clients receive 3 free image enhancements and 1 free day-to-dusk edit when they sign up.',
+                },
+                {
+                  question: 'What file formats do you accept?',
+                  answer: 'We accept all common formats including JPG, PNG, RAW files (CR2, NEF, ARW), and TIFF. We deliver final images in high-resolution JPG format.',
+                },
+                {
+                  question: 'Can I request revisions?',
+                  answer: 'Absolutely! We offer unlimited revisions until you\'re 100% satisfied with the results. Your satisfaction is our priority.',
+                },
+                {
+                  question: 'How does pricing work?',
+                  answer: 'We charge per image with no subscriptions or hidden fees. Pricing varies by service type, starting at $0.75 per photo for basic editing.',
+                },
+                {
+                  question: 'Who owns the edited photos?',
+                  answer: 'You do! We don\'t claim any copyright or ownership of your images. All edited photos are 100% yours to use as you wish.',
+                },
+                {
+                  question: 'Do you provide video editing services?',
+                  answer: 'Yes! We offer professional real estate video editing including color correction, stabilization, transitions, music, and more. Contact us for custom video editing quotes.',
+                },
+              ].map((faq, index) => (
+                <Card
+                  key={index}
+                  hoverable
+                  onClick={() => toggleFaq(index)}
+                  style={{
+                    border: '1px solid #e5e7eb',
+                    borderRadius: '12px',
+                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease',
+                  }}
+                  styles={{ body: { padding: '10px 14px 10px 14px' } }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <h3
+                      style={{
+                        fontSize: '18px',
+                        fontWeight: 600,
+                        color: '#1a1a1a',
+                        margin: 0,
+                        flex: 1,
+                      }}
+                    >
+                      {faq.question}
+                    </h3>
+                    <span
+                      style={{
+                        fontSize: '24px',
+                        color: '#f97316',
+                        fontWeight: 600,
+                        marginLeft: '16px',
+                        transform: openFaqIndex === index ? 'rotate(45deg)' : 'rotate(0deg)',
+                        transition: 'transform 0.3s ease',
+                        display: 'inline-block',
+                      }}
+                    >
+                      +
+                    </span>
+                  </div>
+                  {openFaqIndex === index && (
+                    <p
+                      style={{
+                        color: '#666',
+                        fontSize: '15px',
+                        lineHeight: 1.7,
+                        margin: 0,
+                        marginTop: '16px',
+                        paddingTop: '16px',
+                        borderTop: '1px solid #e5e7eb',
+                      }}
+                    >
+                      {faq.answer}
+                    </p>
+                  )}
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+      </AnimatedSection>
+
+      {/* ─────────────────────────────────────────────────────────────────────
+          FINAL CTA SECTION
+      ───────────────────────────────────────────────────────────────────── */}
+      <AnimatedSection delayMs={240} yOffset={24}>
+        <section
+          style={{
+            padding: '80px 5%',
+            background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)',
+            textAlign: 'center',
+            overflowX: 'hidden',
+          }}
+        >
+          <div style={{ maxWidth: '800px', margin: '0 auto', width: '100%' }}>
+            <h2
+              style={{
+                fontSize: 'clamp(32px, 5vw, 48px)',
+                fontWeight: 700,
+                color: '#fff',
+                marginBottom: '20px',
+                lineHeight: 1.2,
+              }}
+            >
+              Ready to Transform Your Property Photos?
+            </h2>
+            <p
+              style={{
+                fontSize: '18px',
+                color: 'rgba(255, 255, 255, 0.85)',
+                marginBottom: '40px',
+                lineHeight: 1.7,
+              }}
+            >
+              Join thousands of real estate professionals who trust us with their photo editing needs.
+              Start your free trial today—no credit card required.
+            </p>
+            <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Button
+                type="primary"
+                size="large"
+                onClick={() => navigate('/contact')}
+                style={{
+                  height: '56px',
+                  padding: '0 48px',
+                  fontSize: '18px',
+                  fontWeight: 600,
+                  background: 'linear-gradient(135deg, #f97316, #ea580c)',
+                  border: 'none',
+                  borderRadius: '8px',
+                  boxShadow: '0 8px 24px rgba(249, 115, 22, 0.4)',
+                }}
+              >
+                Get Started Free
+              </Button>
+              <Button
+                size="large"
+                onClick={() => navigate('/gallery')}
+                style={{
+                  height: '56px',
+                  padding: '0 48px',
+                  fontSize: '18px',
+                  fontWeight: 600,
+                  background: 'transparent',
+                  border: '2px solid #fff',
+                  color: '#fff',
+                  borderRadius: '8px',
+                }}
+              >
+                View Gallery
+              </Button>
+            </div>
           </div>
         </section>
       </AnimatedSection>

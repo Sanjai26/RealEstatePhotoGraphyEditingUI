@@ -531,7 +531,7 @@ const Services: React.FC = () => {
                     </div>
 
                     <div style={{ padding: '20px 22px 18px', background: '#fff' }}>
-                      <Title level={4} style={{ marginBottom: '8px', color: '#1f2937' }}>
+                      <Title level={4} style={{ marginBottom: '8px', color: 'rgb(249, 115, 22)' }}>
                         {svc.title}
                       </Title>
                       <Paragraph style={{ color: '#10131a', marginBottom: '0px', fontSize: '14px', lineHeight: 1.7 }}>
