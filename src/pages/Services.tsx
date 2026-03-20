@@ -159,7 +159,8 @@ const Services: React.FC = () => {
     { quantity: '400 images', standardPrice: '$240', discount: '33%', finalPrice: '$160' },
     { quantity: '500 images', standardPrice: '$300', discount: '35%', finalPrice: '$195', popular: true },
     { quantity: '800 images', standardPrice: '$480', discount: '38%', finalPrice: '$298', popular: true },
-    { quantity: '1000+ images', standardPrice: 'Custom', discount: '~40–45%', finalPrice: '$0.35 / image' },
+    { quantity: '1000+ images', standardPrice: 'Custom', discount: '~40–45%', finalPrice: '$0.40 / image' },
+    { quantity: '1500+ images', standardPrice: 'Custom', discount: '~50%', finalPrice: '$0.35 / image' },
   ];
 
   const priorityPackages: PriorityPackageRow[] = [
@@ -561,7 +562,7 @@ const Services: React.FC = () => {
           </div>
 
             <Row gutter={[24, 24]}>
-              <Col xs={24} md={12} xl={6}>
+              <Col xs={24} md={12} xl={8}>
               <Card
                 className="bg-white/5 border-white/10 backdrop-blur-sm"
                 bodyStyle={{ padding: '22px' }}
@@ -603,7 +604,7 @@ const Services: React.FC = () => {
                 </div>
               </Card>
               </Col>
-              <Col xs={24} md={12} xl={6}>
+              <Col xs={24} md={12} xl={8}>
               <Card
                 className="bg-white/5 border-white/10 backdrop-blur-sm"
                 bodyStyle={{ padding: '22px' }}
@@ -633,101 +634,80 @@ const Services: React.FC = () => {
               </Card>
               </Col>
 
-              <Col xs={24} md={12} xl={6}>
-              <Card
-                className="bg-white/5 border-white/10 backdrop-blur-sm"
-                bodyStyle={{ padding: '22px' }}
-              >
-                <Title level={3} className="!text-white !mb-4">
-                  Weekly Priority Packages (USD)
-                </Title>
+              <Col xs={24} md={12} xl={8}>
+                <div className="flex flex-col gap-6 h-full">
+                  <Card
+                    className="bg-white/5 border-white/10 backdrop-blur-sm"
+                    bodyStyle={{ padding: '22px' }}
+                  >
+                    <Title level={3} className="!text-white !mb-4">
+                      Weekly Priority Packages (USD)
+                    </Title>
 
-                <div className="overflow-x-auto">
-                  <table className="min-w-full text-left text-sm">
-                    <thead>
-                      <tr className="text-white/80">
-                        <th className="py-2 pr-4 font-semibold">Package</th>
-                        <th className="py-2 pr-4 font-semibold">Images / week</th>
-                        <th className="py-2 font-semibold">Weekly Payment</th>
-                      </tr>
-                    </thead>
-                    <tbody className="text-white/90">
-                      {priorityPackages.map((row) => (
-                        <tr key={row.packageName} className="border-t border-white/10">
-                          <td className="py-2 pr-4 whitespace-nowrap font-semibold">
-                            <div className="flex items-center gap-2">
-                              <span>{row.packageName}</span>
-                              {row.popular && (
-                                <Tag color="orange" style={{ marginInlineEnd: 0, fontWeight: 600 }}>
-                                  Popular
-                                </Tag>
-                              )}
-                            </div>
-                          </td>
-                          <td className="py-2 pr-4 whitespace-nowrap">{row.images}</td>
-                          <td className="py-2 whitespace-nowrap text-orange-400 font-semibold">{row.weeklyPayment}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                    <div className="overflow-x-auto">
+                      <table className="min-w-full text-left text-sm">
+                        <thead>
+                          <tr className="text-white/80">
+                            <th className="py-2 pr-4 font-semibold">Package</th>
+                            <th className="py-2 pr-4 font-semibold">Images / week</th>
+                            <th className="py-2 font-semibold">Weekly Payment</th>
+                          </tr>
+                        </thead>
+                        <tbody className="text-white/90">
+                          {priorityPackages.map((row) => (
+                            <tr key={row.packageName} className="border-t border-white/10">
+                              <td className="py-2 pr-4 whitespace-nowrap font-semibold">
+                                <div className="flex items-center gap-2">
+                                  <span>{row.packageName}</span>
+                                  {row.popular && (
+                                    <Tag color="orange" style={{ marginInlineEnd: 0, fontWeight: 600 }}>
+                                      Popular
+                                    </Tag>
+                                  )}
+                                </div>
+                              </td>
+                              <td className="py-2 pr-4 whitespace-nowrap">{row.images}</td>
+                              <td className="py-2 whitespace-nowrap text-orange-400 font-semibold">{row.weeklyPayment}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </Card>
+
+                  <Card
+                    bordered={false}
+                    className="bg-white/5 backdrop-blur-sm"
+                    style={{
+                      border: 'none',
+                      borderRadius: 18,
+                      background: 'linear-gradient(135deg, rgba(30, 58, 138, 0.35), rgba(15, 23, 42, 0.35))',
+                      boxShadow: '0 18px 50px rgba(2, 6, 23, 0.45)',
+                    }}
+                    bodyStyle={{ padding: '22px', display: 'flex', flexDirection: 'column' }}
+                  >
+                    <div style={{ flex: 1 }}>
+                      <Title level={3} className="!text-white !mb-3">
+                        Need a Custom Quote?
+                      </Title>
+                    </div>
+
+                    <Button
+                      type="primary"
+                      size="large"
+                      icon={<ArrowRightOutlined />}
+                      className="mt-6 px-10 py-6 h-auto text-base md:text-lg font-semibold border-0 w-full"
+                      style={{
+                        background: 'linear-gradient(135deg, #f97316, #ea580c)',
+                        border: 'none',
+                      }}
+                      onClick={() => navigate('/contact')}
+                    >
+                      Contact Us Now
+                    </Button>
+                  </Card>
                 </div>
-              </Card>
               </Col>
-
-            {/* CTA (4th column) */}
-              <Col xs={24} md={12} xl={6}>
-              <Card
-                bordered={false}
-                className="bg-white/5 backdrop-blur-sm"
-                style={{
-                  border: 'none',
-                  borderRadius: 18,
-                  background: 'linear-gradient(135deg, rgba(30, 58, 138, 0.35), rgba(15, 23, 42, 0.35))',
-                  boxShadow: '0 18px 50px rgba(2, 6, 23, 0.45)',
-                  height: '100%',
-                }}
-                bodyStyle={{ padding: '22px', height: '100%', display: 'flex', flexDirection: 'column' }}
-              >
-                <div style={{ flex: 1 }}>
-                  <Title level={3} className="!text-white !mb-3">
-                    Need a Custom Quote?
-                  </Title>
-                  <Paragraph className="!text-white/85 text-base !mb-4">
-                    Get a fast response with a tailored plan for your workload, turnaround time, and editing style.
-                  </Paragraph>
-
-                  <div className="space-y-2 text-white/80 text-sm">
-                    <div className="flex items-start gap-2">
-                      <span className="text-orange-400 font-bold">•</span>
-                      <span>Volume & Bulk Image</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <span className="text-orange-400 font-bold">•</span>
-                      <span>Weekly packages</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <span className="text-orange-400 font-bold">•</span>
-                      <span>Custom editing pricing</span>
-                    </div>
-                  </div>
-                </div>
-
-                <Button
-                  type="primary"
-                  size="large"
-                  icon={<ArrowRightOutlined />}
-                  className="mt-6 px-10 py-6 h-auto text-base md:text-lg font-semibold border-0 w-full"
-                  style={{
-                    background: 'linear-gradient(135deg, #f97316, #ea580c)',
-                    border: 'none',
-                  }}
-                  onClick={() => navigate('/contact')}
-                >
-                  Contact Us Now
-                </Button>
-              </Card>
-              </Col>
-            
             </Row>
           </div>
         </div>

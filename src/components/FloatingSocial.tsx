@@ -1,18 +1,19 @@
 import React from 'react';
-import instagramIcon from '../assets/images/instagram-color.png';
-import whatsappIcon from '../assets/images/whatsapp-color.png';
+import { FacebookOutlined, InstagramOutlined } from '@ant-design/icons';
 
 const FloatingSocial: React.FC = () => {
   const links = [
     {
-      href: 'https://www.instagram.com/',
-      label: 'Instagram',
-      icon: instagramIcon,
+      href: 'https://www.facebook.com/people/Elite-Ajai/61583084661998/',
+      label: 'Facebook',
+      icon: <FacebookOutlined />,
+      color: '#1877f2',
     },
     {
-      href: 'https://wa.me/1234567890',
-      label: 'WhatsApp',
-      icon: whatsappIcon,
+      href: 'https://www.instagram.com/ajai_pixel',
+      label: 'Instagram',
+      icon: <InstagramOutlined />,
+      color: '#E4405F',
     },
   ];
 
@@ -44,6 +45,9 @@ const FloatingSocial: React.FC = () => {
             justifyContent: 'center',
             boxShadow: '0 12px 30px rgba(0,0,0,0.25)',
             transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+            background: '#fff',
+            color: item.color,
+            fontSize: '24px',
           }}
           onMouseOver={(e) => {
             e.currentTarget.style.transform = 'translateY(-4px) scale(1.03)';
@@ -54,12 +58,7 @@ const FloatingSocial: React.FC = () => {
             e.currentTarget.style.boxShadow = '0 12px 30px rgba(0,0,0,0.25)';
           }}
         >
-          <img
-            src={item.icon}
-            alt={item.label}
-            style={{ width: '26px', height: '26px' }}
-            draggable={false}
-          />
+          {item.icon}
         </a>
       ))}
     </div>

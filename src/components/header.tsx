@@ -175,7 +175,7 @@ const Header: React.FC = () => {
           }}
         >
           <img
-            src="/assets/images/studio-logo.png"
+            src={logo}
             alt="Logo"
             style={{ height: '40px', width: 'auto' }}
           />

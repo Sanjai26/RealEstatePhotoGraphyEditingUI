@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   FacebookOutlined,
-  TwitterOutlined,
   InstagramOutlined,
   LinkedinOutlined,
 } from '@ant-design/icons';
@@ -23,10 +22,9 @@ const Footer: React.FC = () => {
   ];
 
   const socialIcons = [
-    { icon: <FacebookOutlined />, href: '#', label: 'Facebook' },
-    { icon: <TwitterOutlined />, href: '#', label: 'Twitter' },
-    { icon: <InstagramOutlined />, href: '#', label: 'Instagram' },
-    { icon: <LinkedinOutlined />, href: '#', label: 'LinkedIn' },
+    { icon: <FacebookOutlined />, href: 'https://www.facebook.com/people/Elite-Ajai/61583084661998/', label: 'Facebook' },
+    { icon: <InstagramOutlined />, href: 'https://www.instagram.com/ajai_pixel', label: 'Instagram' },
+    { icon: <LinkedinOutlined />, href: 'https://www.linkedin.com/in/ajai-pixel-44a9b2380/', label: 'LinkedIn' },
   ];
 
   const linkStyle: React.CSSProperties = {
@@ -162,6 +160,9 @@ const Footer: React.FC = () => {
                 </a>
               ))}
             </div>
+            <p style={{ color: 'rgba(255, 255, 255, 0.75)', fontSize: '15px', marginTop: '16px' }}>
+              Phone: <a href="tel:+919363545080" style={{ color: '#f97316', textDecoration: 'none' }}>+91 9363545080</a>
+            </p>
           </div>
         </div>
 

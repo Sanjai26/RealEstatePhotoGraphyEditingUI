@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Input, Card } from 'antd';
+import { Button, Input, Card, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import AnimatedSection from '../components/AnimatedSection';
 import img_01 from '../assets/images/hero-img-1.jpg';
@@ -156,9 +156,17 @@ const testimonials = [
 ];
 
 const Home: React.FC = () => {
+  const allowedCompressedExtensions = ['zip', 'rar', '7z', 'tar', 'gz', 'tgz', 'bz2', 'xz'];
+  const maxFileSizeBytes = 50 * 1024 * 1024;
+
   const [currentSlide, setCurrentSlide] = useState(0);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isSubmittingTrial, setIsSubmittingTrial] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const navigate = useNavigate();
+
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? '';
 
   // Auto-advance hero carousel every 6 seconds
   useEffect(() => {
@@ -170,6 +178,87 @@ const Home: React.FC = () => {
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0] ?? null;
+
+    if (!file) {
+      setSelectedFile(null);
+      return;
+    }
+
+    const extension = file.name.split('.').pop()?.toLowerCase() ?? '';
+    if (!allowedCompressedExtensions.includes(extension)) {
+      message.error('Please upload a compressed file (.zip, .rar, .7z, .tar, .gz, .tgz, .bz2, .xz).');
+      setSelectedFile(null);
+      event.target.value = '';
+      return;
+    }
+
+    if (file.size > maxFileSizeBytes) {
+      message.error('File must be less than 50 MB.');
+      setSelectedFile(null);
+      event.target.value = '';
+      return;
+    }
+
+    setSelectedFile(file);
+  };
+
+  const handleTrialSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formElement = event.currentTarget;
+    const submittedValues = new FormData(formElement);
+    const fullName = String(submittedValues.get('fullName') ?? '').trim();
+    const email = String(submittedValues.get('email') ?? '').trim();
+    const description = String(submittedValues.get('description') ?? '').trim();
+
+    if (!fullName.trim() || !email.trim()) {
+      message.error('Full Name and Email ID are required.');
+      return;
+    }
+
+    if (!selectedFile) {
+      message.error('Please upload a file.');
+      return;
+    }
+
+    try {
+      setIsSubmittingTrial(true);
+      const formData = new FormData();
+      formData.append('fullName', fullName.trim());
+      formData.append('email', email.trim());
+      formData.append('description', description.trim());
+      formData.append('file', selectedFile);
+
+      const endpoint = `${API_BASE_URL}/api/trail-edit`;
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        body: formData,
+      });
+
+      const responseData: { message?: string } = await response
+        .json()
+        .catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(responseData.message || 'Failed to submit free trial request.');
+      }
+
+      message.success('Free trial request submitted successfully.');
+      formElement.reset();
+      setSelectedFile(null);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Unexpected error occurred';
+      message.error(errorMessage);
+    } finally {
+      setIsSubmittingTrial(false);
+    }
   };
 
   return (
@@ -505,6 +594,13 @@ const Home: React.FC = () => {
             <p style={{ color: '#666', marginBottom: '24px' }}>
               Drag & drop your photos here or click to browse
             </p>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".zip,.rar,.7z,.tar,.gz,.tgz,.bz2,.xz"
+              onChange={handleFileChange}
+              style={{ display: 'none' }}
+            />
             <div
               style={{
                 height: '200px',
@@ -518,6 +614,7 @@ const Home: React.FC = () => {
                 transition: 'all 0.3s ease',
                 background: '#fafafa',
               }}
+              onClick={() => fileInputRef.current?.click()}
               onMouseOver={(e) => {
                 e.currentTarget.style.borderColor = '#f97316';
                 e.currentTarget.style.background = '#fff8f3';
@@ -528,7 +625,9 @@ const Home: React.FC = () => {
               }}
             >
               <UploadOutlined style={{ fontSize: '40px', color: '#999', marginBottom: '12px' }} />
-              <p style={{ color: '#666', margin: 0 }}>Drop files here</p>
+              <p style={{ color: '#666', margin: 0 }}>
+                {selectedFile ? selectedFile.name : 'Drop files here'}
+              </p>
             </div>
           </div>
 
@@ -537,15 +636,17 @@ const Home: React.FC = () => {
             <h3 style={{ fontSize: '24px', fontWeight: 700, color: '#1a1a1a', marginBottom: '24px' }}>
               Get Your Free Trial
             </h3>
-            <form style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <form style={{ display: 'flex', flexDirection: 'column', gap: '20px' }} onSubmit={handleTrialSubmit}>
               <div>
                 <label style={{ display: 'block', marginBottom: '8px', fontWeight: 500, color: '#333' }}>
                   Full Name
                 </label>
                 <Input
+                  className="trial-form-input"
+                  name="fullName"
                   size="large"
                   placeholder="Enter your name"
-                  style={{ borderRadius: '8px' }}
+                  style={{ borderRadius: '8px', color: '#1a1a1a', background: '#fff' }}
                 />
               </div>
               <div>
@@ -553,10 +654,12 @@ const Home: React.FC = () => {
                   Email ID
                 </label>
                 <Input
+                  className="trial-form-input"
+                  name="email"
                   size="large"
                   type="email"
                   placeholder="Enter your email"
-                  style={{ borderRadius: '8px' }}
+                  style={{ borderRadius: '8px', color: '#1a1a1a', background: '#fff' }}
                 />
               </div>
               <div>
@@ -564,15 +667,19 @@ const Home: React.FC = () => {
                   Description
                 </label>
                 <TextArea
+                  className="trial-form-input"
+                  name="description"
                   rows={3}
                   placeholder="Tell us about your project"
-                  style={{ borderRadius: '8px' }}
+                  style={{ borderRadius: '8px', color: '#1a1a1a', background: '#fff' }}
                 />
               </div>
               <Button
                 type="primary"
                 size="large"
                 block
+                htmlType="submit"
+                loading={isSubmittingTrial}
                 style={{
                   height: '48px',
                   fontSize: '16px',

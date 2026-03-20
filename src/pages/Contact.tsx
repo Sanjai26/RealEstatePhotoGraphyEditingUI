@@ -1,8 +1,11 @@
 import React from 'react';
 import { Layout, Row, Col, Form, Input, Button, Card, Space } from 'antd';
 import { MailOutlined, PhoneOutlined, EnvironmentOutlined, ClockCircleOutlined, SendOutlined } from '@ant-design/icons';
-import img_hero from '../assets/images/aesthetic-summer-holidays.jpg';
+import img_hero from '../assets/images/Contact_Hero_img.jpg';
 import AnimatedSection from '../components/AnimatedSection';
+import Select from 'react-select';
+import CountryFlag from 'react-country-flag';
+import { countryOptions } from '../data/countries';
 
 const { Content } = Layout;
 const { TextArea } = Input;
@@ -16,6 +19,7 @@ interface ContactInfo {
 const Contact: React.FC = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = React.useState(false);
+  const [selectedCountry, setSelectedCountry] = React.useState<any>(null);
 
   // Spring Boot backend URL - update this after deployment
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -24,12 +28,12 @@ const Contact: React.FC = () => {
     {
       icon: <MailOutlined />,
       title: 'Email Us',
-      details: ['hello@realestatephoto.com', 'support@realestatephoto.com']
+      details: ['editing@ajaipixel.com', 'info@ajaipixel.com']
     },
     {
       icon: <PhoneOutlined />,
       title: 'Call Us',
-      details: ['+1 (555) 123-4567', '+1 (555) 987-6543']
+      details: ['+91 (555) 123-4567', '+1 (555) 987-6543']
     },
     {
       icon: <EnvironmentOutlined />,
@@ -62,7 +66,7 @@ const Contact: React.FC = () => {
         firstName: values.firstName?.trim() || '',
         lastName: values.lastName?.trim() || '',
         email: values.email?.trim() || '',
-        country: values.country?.trim() || '',
+        country: selectedCountry?.label || values.country?.trim() || '',
         phoneNumber: values.phoneNumber?.trim() || '',
         intrestService: values.intrestService?.trim() || 'General Inquiry',
         message: values.message?.trim() || '',
@@ -96,7 +100,7 @@ const Contact: React.FC = () => {
     } catch (error) {
       console.error('Contact form error:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
-      alert(`Failed to send message: ${errorMessage}\n\nPlease try again or contact us directly at hello@realestatephoto.com`);
+      alert(`Failed to send message: ${errorMessage}\n\nPlease try again or contact us directly at editing@ajaipixel.com`);
     } finally {
       setLoading(false);
     }
@@ -340,7 +344,7 @@ const Contact: React.FC = () => {
                       <Form.Item
                         name="lastName"
                         label={<span style={{ color: '#fff', fontSize: '15px', fontWeight: 500 }}>Last Name</span>}
-                        rules={[{ required: true, message: 'Please enter your last name' }]}
+                        rules={[]}
                         style={{ marginBottom: '24px' }}
                       >
                         <Input 
@@ -385,21 +389,100 @@ const Contact: React.FC = () => {
                   <Row gutter={16}>
                     <Col xs={24} sm={12}>
                       <Form.Item
-                        name="country"
-                        label={<span style={{ color: '#fff', fontSize: '15px', fontWeight: 500 }}>Country</span>}
-                        rules={[{ required: true, message: 'Please enter your country' }]}
+                        label={<span style={{ color: '#fff', fontSize: '15px', fontWeight: 500 }}><span style={{ color: '#ff4d4f', marginRight: '4px' }}>*</span>Country</span>}
+                        rules={[{ required: true, message: 'Please select your country' }]}
                         style={{ marginBottom: '24px' }}
                       >
-                        <Input 
-                          placeholder="USA"
-                          style={{
-                            background: 'rgba(255, 255, 255, 0.1)',
-                            border: '1px solid rgba(255, 255, 255, 0.2)',
-                            borderRadius: '8px',
-                            color: '#fff',
-                            fontSize: '15px',
-                            padding: '12px 16px',
-                            height: '48px',
+                        <Select
+                          options={countryOptions}
+                          value={selectedCountry}
+                          onChange={(option) => {
+                            setSelectedCountry(option);
+                            form.setFieldValue('country', option?.label);
+                          }}
+                          placeholder="Select your country"
+                          isClearable
+                          isSearchable
+                          classNamePrefix="country-select"
+                          formatOptionLabel={(option) => (
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', lineHeight: '1.5' }}>
+                              <CountryFlag countryCode={option.code} svg style={{ width: '24px', height: '18px', flexShrink: 0 }} />
+                              <span style={{ whiteSpace: 'nowrap' }}>{option.label}</span>
+                            </div>
+                          )}
+                          styles={{
+                            control: (baseStyles) => ({
+                              ...baseStyles,
+                              background: 'rgba(255, 255, 255, 0.1)',
+                              border: '1px solid rgba(255, 255, 255, 0.2)',
+                              borderRadius: '8px',
+                              color: '#fff',
+                              minHeight: '48px',
+                              height: '48px',
+                              boxShadow: 'none',
+                              padding: '0px',
+                              display: 'flex',
+                              alignItems: 'center',
+                            }),
+                            valueContainer: (baseStyles) => ({
+                              ...baseStyles,
+                              padding: '8px 12px',
+                              display: 'flex',
+                              alignItems: 'center',
+                            }),
+                            input: (baseStyles) => ({
+                              ...baseStyles,
+                              color: '#fff',
+                              padding: '0',
+                              margin: '0',
+                            }),
+                            placeholder: (baseStyles) => ({
+                              ...baseStyles,
+                              color: 'rgba(255, 255, 255, 0.5)',
+                              margin: '0',
+                            }),
+                            singleValue: (baseStyles) => ({
+                              ...baseStyles,
+                              color: '#fff',
+                              margin: '0',
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '8px',
+                            }),
+                            option: (baseStyles, { isFocused, isSelected }) => ({
+                              ...baseStyles,
+                              background: isSelected
+                                ? 'rgba(249, 115, 22, 0.3)'
+                                : isFocused
+                                  ? 'rgba(255, 255, 255, 0.15)'
+                                  : '#1a1a1a',
+                              color: '#fff',
+                              cursor: 'pointer',
+                              padding: '10px 12px',
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '8px',
+                            }),
+                            menu: (baseStyles) => ({
+                              ...baseStyles,
+                              background: '#1a1a1a',
+                              border: '1px solid rgba(255, 255, 255, 0.2)',
+                              borderRadius: '8px',
+                            }),
+                            menuList: (baseStyles) => ({
+                              ...baseStyles,
+                              padding: '4px 0',
+                            }),
+                            clearIndicator: (baseStyles) => ({
+                              ...baseStyles,
+                              color: 'rgba(255, 255, 255, 0.6)',
+                              padding: '8px',
+                            }),
+                            dropdownIndicator: (baseStyles) => ({
+                              ...baseStyles,
+                              color: 'rgba(255, 255, 255, 0.6)',
+                              padding: '8px',
+                            }),
                           }}
                         />
                       </Form.Item>
@@ -409,8 +492,7 @@ const Contact: React.FC = () => {
                         name="phoneNumber"
                         label={<span style={{ color: '#fff', fontSize: '15px', fontWeight: 500 }}>Phone Number</span>}
                         rules={[
-                          { required: true, message: 'Please enter your phone number' },
-                          { pattern: /^[0-9]{6,15}$/, message: 'Please enter a valid phone number (6-15 digits)' }
+                          { pattern: /^[0-9]{6,15}$|^$/, message: 'Please enter a valid phone number (6-15 digits)' }
                         ]}
                         style={{ marginBottom: '24px' }}
                       >
@@ -433,6 +515,7 @@ const Contact: React.FC = () => {
                   <Form.Item
                     name="intrestService"
                     label={<span style={{ color: '#fff', fontSize: '15px', fontWeight: 500 }}>Interested Service</span>}
+                    rules={[{ required: true, message: 'Please enter the service you are interested in' }]}
                     style={{ marginBottom: '24px' }}
                   >
                     <Input 
@@ -452,7 +535,7 @@ const Contact: React.FC = () => {
                   <Form.Item
                     name="message"
                     label={<span style={{ color: '#fff', fontSize: '15px', fontWeight: 500 }}>Message</span>}
-                    rules={[{ required: true, message: 'Please enter your message' }]}
+                    rules={[]}
                     style={{ marginBottom: '32px' }}
                   >
                     <TextArea 

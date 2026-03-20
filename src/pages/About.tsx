@@ -493,6 +493,394 @@ const About: React.FC = () => {
           </div>
         </section>
       </AnimatedSection>
+
+      {/* Mission & Vision Section */}
+      <AnimatedSection delayMs={160} yOffset={24}>
+        <section style={{ background: '#fff', padding: '60px 20px', overflow: 'hidden' }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+            <h2
+              style={{
+                fontSize: 'clamp(28px, 4vw, 42px)',
+                fontWeight: 700,
+                color: '#1a1a1a',
+                marginBottom: '50px',
+                lineHeight: 1.3,
+                textAlign: 'center',
+              }}
+            >
+              Our Mission & Vision
+            </h2>
+            <Row gutter={[48, 48]}>
+              <Col xs={24} md={12}>
+                <div
+                  style={{
+                    padding: '32px',
+                    background: 'linear-gradient(135deg, #ffb37d53 0%, #ffe8d6 100%)',
+                    borderRadius: '16px',
+                    borderLeft: '4px solid #f97316',
+                  }}
+                >
+                  <h3
+                    style={{
+                      fontSize: '24px',
+                      fontWeight: 700,
+                      color: '#f97316',
+                      marginBottom: '16px',
+                    }}
+                  >
+                    Our Mission
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: '16px',
+                      lineHeight: 1.8,
+                      color: '#4a5568',
+                      margin: 0,
+                    }}
+                  >
+                    To empower real estate professionals by providing exceptional photo editing services that
+                    transform property images into compelling visual assets. We are committed to delivering
+                    fast, affordable, and high-quality editing that helps agents and photographers maximize their
+                    listing potential and close deals faster.
+                  </p>
+                </div>
+              </Col>
+              <Col xs={24} md={12}>
+                <div
+                  style={{
+                    padding: '32px',
+                    background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)',
+                    borderRadius: '16px',
+                    borderLeft: '4px solid #0ea5e9',
+                  }}
+                >
+                  <h3
+                    style={{
+                      fontSize: '24px',
+                      fontWeight: 700,
+                      color: '#0ea5e9',
+                      marginBottom: '16px',
+                    }}
+                  >
+                    Our Vision
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: '16px',
+                      lineHeight: 1.8,
+                      color: '#4a5568',
+                      margin: 0,
+                    }}
+                  >
+                    To become the most trusted and reliable real estate photo editing partner globally, known for
+                    exceptional quality, unmatched reliability, and customer-centric service. We envision a future
+                    where every property listing is presented in its best light, helping buyers fall in love with homes
+                    from their first glance.
+                  </p>
+                </div>
+              </Col>
+            </Row>
+          </div>
+        </section>
+      </AnimatedSection>
+
+      {/* Core Values Section */}
+      <AnimatedSection delayMs={180} yOffset={22}>
+        <section style={{ background: '#393b3f12', padding: '60px 20px', overflow: 'hidden' }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+            <h2
+              style={{
+                fontSize: 'clamp(28px, 4vw, 42px)',
+                fontWeight: 700,
+                color: '#1a1a1a',
+                marginBottom: '50px',
+                lineHeight: 1.3,
+                textAlign: 'center',
+              }}
+            >
+              Core Values
+            </h2>
+            <Row gutter={[32, 32]}>
+              {[
+                {
+                  title: 'Quality Excellence',
+                  description: 'We never compromise on quality. Every edit is meticulously crafted to meet the highest industry standards.',
+                  icon: '✨',
+                },
+                {
+                  title: 'Customer Focus',
+                  description: 'Your satisfaction is our priority. We listen, adapt, and exceed expectations every single time.',
+                  icon: '💼',
+                },
+                {
+                  title: 'Fast Delivery',
+                  description: 'Speed matters in real estate. We deliver stunning results within 24 hours (48 for virtual staging).',
+                  icon: '⚡',
+                },
+                {
+                  title: 'Reliability',
+                  description: 'You can count on us. With 99.98% on-time delivery, we are the partner you can trust completely.',
+                  icon: '🎯',
+                },
+              ].map((value, index) => (
+                <Col xs={24} sm={12} md={6} key={index}>
+                  <div
+                    style={{
+                      padding: '32px',
+                      background: '#fff',
+                      borderRadius: '16px',
+                      boxShadow: '0 2px 12px rgba(0, 0, 0, 0.04)',
+                      transition: 'all 0.3s ease',
+                      border: '1px solid #e5e7eb',
+                      textAlign: 'center',
+                      height: '100%',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.boxShadow = '0 8px 24px rgba(249, 115, 22, 0.15)';
+                      e.currentTarget.style.transform = 'translateY(-4px)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.boxShadow = '0 2px 12px rgba(0, 0, 0, 0.04)';
+                      e.currentTarget.style.transform = 'translateY(0)';
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: '48px',
+                        marginBottom: '16px',
+                      }}
+                    >
+                      {value.icon}
+                    </div>
+                    <h3
+                      style={{
+                        fontSize: '20px',
+                        fontWeight: 700,
+                        color: '#1a1a1a',
+                        marginBottom: '12px',
+                      }}
+                    >
+                      {value.title}
+                    </h3>
+                    <p
+                      style={{
+                        fontSize: '15px',
+                        lineHeight: 1.7,
+                        color: '#64748b',
+                        margin: 0,
+                      }}
+                    >
+                      {value.description}
+                    </p>
+                  </div>
+                </Col>
+              ))}
+            </Row>
+          </div>
+        </section>
+      </AnimatedSection>
+
+      {/* Work Process Section */}
+      <AnimatedSection delayMs={200} yOffset={24}>
+        <section style={{ background: '#fff', padding: '60px 20px', overflow: 'hidden' }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+            <h2
+              style={{
+                fontSize: 'clamp(28px, 4vw, 42px)',
+                fontWeight: 700,
+                color: '#1a1a1a',
+                marginBottom: '16px',
+                lineHeight: 1.3,
+                textAlign: 'center',
+              }}
+            >
+              Our Work Process
+            </h2>
+            <p
+              style={{
+                fontSize: '16px',
+                lineHeight: 1.8,
+                color: '#64748b',
+                maxWidth: '700px',
+                margin: '0 auto 50px',
+                textAlign: 'center',
+              }}
+            >
+              A streamlined process designed for efficiency and exceptional results
+            </p>
+            <Row gutter={[32, 32]}>
+              {[
+                {
+                  number: '01',
+                  title: 'Receive Your Files',
+                  description: 'You upload your photos through our easy-to-use platform. We accept all formats and handle every type of real estate image.',
+                },
+                {
+                  number: '02',
+                  title: 'Expert Analysis',
+                  description: 'Our editors analyze your images to understand your vision and requirements for the perfect edit.',
+                },
+                {
+                  number: '03',
+                  title: 'Professional Editing',
+                  description: 'Using industry-leading tools and techniques, we enhance your photos with precision and artistry.',
+                },
+                {
+                  number: '04',
+                  title: 'Quality Review',
+                  description: 'Every edit undergoes rigorous quality control to ensure it meets our exacting standards.',
+                },
+                {
+                  number: '05',
+                  title: 'Fast Delivery',
+                  description: 'Your polished images are ready for download within 24 hours, perfectly formatted for MLS and web.',
+                },
+                {
+                  number: '06',
+                  title: 'Unlimited Revisions',
+                  description: 'Not satisfied? Request unlimited revisions until your images are exactly as you envision them.',
+                },
+              ].map((step, index) => (
+                <Col xs={24} sm={12} md={8} key={index}>
+                  <div
+                    style={{
+                      textAlign: 'center',
+                      position: 'relative',
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: '80px',
+                        height: '80px',
+                        background: 'linear-gradient(135deg, #f97316, #ea580c)',
+                        borderRadius: '50%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        margin: '0 auto 24px',
+                        fontSize: '32px',
+                        fontWeight: 700,
+                        color: '#fff',
+                        boxShadow: '0 8px 24px rgba(249, 115, 22, 0.3)',
+                      }}
+                    >
+                      {step.number}
+                    </div>
+                    <h3
+                      style={{
+                        fontSize: '18px',
+                        fontWeight: 700,
+                        color: '#1a1a1a',
+                        marginBottom: '12px',
+                      }}
+                    >
+                      {step.title}
+                    </h3>
+                    <p
+                      style={{
+                        fontSize: '15px',
+                        lineHeight: 1.7,
+                        color: '#64748b',
+                        margin: 0,
+                      }}
+                    >
+                      {step.description}
+                    </p>
+                  </div>
+                </Col>
+              ))}
+            </Row>
+          </div>
+        </section>
+      </AnimatedSection>
+
+      {/* Why Choose Us Section */}
+      <AnimatedSection delayMs={220} yOffset={24}>
+        <section
+          style={{
+            background: 'linear-gradient(135deg, #f97316 0%, #ea580c 100%)',
+            padding: '60px 20px',
+            overflow: 'hidden',
+            color: '#fff',
+          }}
+        >
+          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+            <h2
+              style={{
+                fontSize: 'clamp(28px, 4vw, 42px)',
+                fontWeight: 700,
+                color: '#fff',
+                marginBottom: '50px',
+                lineHeight: 1.3,
+                textAlign: 'center',
+              }}
+            >
+              Why Choose AJAIPIXELS?
+            </h2>
+            <Row gutter={[32, 32]}>
+              {[
+                {
+                  title: 'Adobe Certified Experts',
+                  description: 'Professional certifications guarantee advanced expertise and up-to-date techniques.',
+                },
+                {
+                  title: 'Real Estate Specialists',
+                  description: 'We specialize exclusively in real estate media—we know what agents, brokers, and photographers need.',
+                },
+                {
+                  title: 'Affordable Pricing',
+                  description: 'Professional quality at competitive rates with no hidden fees or subscription requirements.',
+                },
+                {
+                  title: '24/7 Customer Support',
+                  description: 'Our dedicated support team is always ready to help via live chat, email, or phone.',
+                },
+                {
+                  title: 'Fast Turnaround',
+                  description: 'Standard edits within 24 hours. Our 99.98% on-time delivery rate is industry-leading.',
+                },
+                {
+                  title: 'Complete Copyright',
+                  description: 'All edited images belong to you. We claim no ownership or copyright to your work.',
+                },
+              ].map((item, index) => (
+                <Col xs={24} sm={12} md={8} key={index}>
+                  <div
+                    style={{
+                      padding: '24px',
+                      background: 'rgba(255, 255, 255, 0.1)',
+                      borderRadius: '12px',
+                      backdropFilter: 'blur(10px)',
+                      border: '1px solid rgba(255, 255, 255, 0.2)',
+                    }}
+                  >
+                    <h3
+                      style={{
+                        fontSize: '18px',
+                        fontWeight: 700,
+                        color: '#fff',
+                        marginBottom: '12px',
+                      }}
+                    >
+                      ✓ {item.title}
+                    </h3>
+                    <p
+                      style={{
+                        fontSize: '14px',
+                        lineHeight: 1.7,
+                        color: 'rgba(255, 255, 255, 0.9)',
+                        margin: 0,
+                      }}
+                    >
+                      {item.description}
+                    </p>
+                  </div>
+                </Col>
+              ))}
+            </Row>
+          </div>
+        </section>
+      </AnimatedSection>
     </Content>
   );
 };
