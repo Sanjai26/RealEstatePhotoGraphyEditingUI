@@ -1,16 +1,9 @@
 {
+  "name": "realestatephotographyeditingui",
   "compatibility_date": "2026-01-23",
+
   "assets": {
-    "directory": "./dist"
-  },
-  "routes": [
-    {
-      "pattern": "realestatephotographyeditingui.sanjaisanjai561.workers.dev/*",
-      "zone_name": "realestatephotographyeditingui.sanjaisanjai561.workers.dev"
-    },
-    {
-      "pattern": "ajaipixel.com/*",
-      "zone_name": "ajaipixel.com"
-    }
-  ]
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  }
 }
