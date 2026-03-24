@@ -77,7 +77,18 @@ const Header: React.FC = () => {
               onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
               onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
             />
+            <span
+              style={{
+                color: '#fff',
+                fontSize: '20px',
+                letterSpacing: '2px',
+                lineHeight: 2,
+              }}
+            >
+              AjaiPixel
+            </span>
           </Link>
+          
 
           {/* Desktop Navigation */}
           <nav
@@ -174,11 +185,25 @@ const Header: React.FC = () => {
             borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
           }}
         >
-          <img
-            src={logo}
-            alt="Logo"
-            style={{ height: '40px', width: 'auto' }}
-          />
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <img
+              src={logo}
+              alt="Logo"
+              style={{ height: '40px', width: 'auto' }}
+            />
+            <span
+              style={{
+                marginLeft: '10px',
+                color: '#fff',
+                fontSize: '18px',
+                fontWeight: 700,
+                letterSpacing: '0.4px',
+                lineHeight: 1,
+              }}
+            >
+              AjaiPixel
+            </span>
+          </div>
           <Button
             type="text"
             icon={<CloseOutlined style={{ fontSize: '18px' }} />}

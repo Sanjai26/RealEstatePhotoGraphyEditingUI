@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
   const serviceLinks = [
     { label: 'Photo Editing', href: '/services' },
     { label: 'Virtual Staging', href: '/services' },
-    { label: 'Floor Plans', href: '/services' },
+    { label: 'Sky Replacement', href: '/services' },
   ];
 
   const socialIcons = [

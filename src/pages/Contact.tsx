@@ -33,7 +33,7 @@ const Contact: React.FC = () => {
     {
       icon: <PhoneOutlined />,
       title: 'Call Us',
-      details: ['+91 (555) 123-4567', '+1 (555) 987-6543']
+      details: ['+91 9363545080']
     },
     {
       icon: <EnvironmentOutlined />,

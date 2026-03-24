@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Layout, Row, Col, Pagination } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import img_hero from '../assets/images/Gallery_Hero_img.jpg';
 import AnimatedSection from '../components/AnimatedSection';
 
@@ -12,6 +13,7 @@ const galleryImages = import.meta.glob('../assets/gallery/images/*.jpg', { eager
 >;
 
 const Gallery: React.FC = () => {
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const imagesPerPage = 12;
 
@@ -596,6 +598,7 @@ const Gallery: React.FC = () => {
                   e.currentTarget.style.transform = 'translateY(0)';
                   e.currentTarget.style.boxShadow = '0 8px 24px rgba(249, 115, 22, 0.4)';
                 }}
+                onClick={() => navigate('/#free-trial')}
               >
                 Start Free Trial
               </button>
@@ -617,6 +620,7 @@ const Gallery: React.FC = () => {
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = 'transparent';
                 }}
+                onClick={() => navigate('/services#pricing')}
               >
                 View Pricing
               </button>

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Layout, Typography, Card, Row, Col, Button, Input, Form, message, Tag } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import BeforeAfterSlider from '../components/BeforeAfterSlider';
 import AnimatedSection from '../components/AnimatedSection';
 import img_hero from '../assets/images/aesthetic-summer-holidays.jpg';
@@ -111,8 +111,23 @@ type ServicePriceRow = {
 
 const Services: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (location.hash !== '#pricing') {
+      return;
+    }
+
+    const scrollToPricing = () => {
+      const pricingSection = document.getElementById('pricing');
+      pricingSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    // Ensure section is present before smooth-scrolling after route navigation.
+    window.requestAnimationFrame(scrollToPricing);
+  }, [location.hash]);
 
   const handleSubmit = async (values: any) => {
     setLoading(true);
@@ -550,7 +565,7 @@ const Services: React.FC = () => {
 
       {/* Pricing Section */}
       <AnimatedSection delayMs={120} yOffset={24}>
-        <div className="py-20 px-4 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+        <div id="pricing" className="py-20 px-4 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
           <div className="container mx-auto">
             <div className="text-center mb-10">
             <Title level={2} className="!text-white !text-3xl md:!text-4xl !mb-3">

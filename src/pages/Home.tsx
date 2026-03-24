@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, Input, Card, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import AnimatedSection from '../components/AnimatedSection';
@@ -40,7 +40,7 @@ const heroSlides = [
     subtitle: '',
     description:
       'Bring empty rooms to life with realistic virtual staging, object removal, and décor enhancements.',
-    cta: 'See Before & After',
+    cta: 'See Our Gallery',
     navigation: '/gallery',
   },
   {
@@ -165,6 +165,7 @@ const Home: React.FC = () => {
   const [isSubmittingTrial, setIsSubmittingTrial] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? '';
 
@@ -175,6 +176,20 @@ const Home: React.FC = () => {
     }, 6000);
     return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    if (location.hash !== '#free-trial') {
+      return;
+    }
+
+    const scrollToFreeTrial = () => {
+      const freeTrialSection = document.getElementById('free-trial');
+      freeTrialSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    // Scroll after render when navigating with a hash.
+    window.requestAnimationFrame(scrollToFreeTrial);
+  }, [location.hash]);
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -509,7 +524,7 @@ const Home: React.FC = () => {
               marginBottom: '16px',
             }}
           >
-            How AJAIPIXELS Works
+            How AJAIPIXEL Works
           </h2>
           <p
             style={{
@@ -570,7 +585,7 @@ const Home: React.FC = () => {
           UPLOAD / FREE TRIAL SECTION
       ───────────────────────────────────────────────────────────────────── */}
       <AnimatedSection delayMs={160} yOffset={24}>
-        <section style={{ padding: '40px 5%', background: '#fff', overflowX: 'hidden' }}>
+        <section id="free-trial" style={{ padding: '40px 5%', background: '#fff', overflowX: 'hidden' }}>
           <div
             style={{
               maxWidth: '90%',
